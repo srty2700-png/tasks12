@@ -4,13 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>وزارة الداخلية - المهام الخاصة في درعا</title>
+<meta name="theme-color" content="#071710">
+<meta name="mobile-web-app-capable" content="yes">
+<link id="favIcon" rel="icon" type="image/png" href="">
+<link id="touchIcon" rel="apple-touch-icon" href="">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<!-- محرك قراءة الـ QR السريع والمباشر -->
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
-<!-- مكتبة Lucide Icons -->
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 :root { 
@@ -19,38 +21,20 @@
     --border-light:#d1dcd4; --text-main:#2c3e33; --text-muted:#61796b; --success:#10b981; --success-bg:#d1fae5; 
     --danger:#ef4444; --danger-bg:#fee2e2; --transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); --main-font:'Tajawal', sans-serif; --title-font:'Amiri', serif;
 }
-body.light-mode {
-    --bg-body: #f4f6f4; --bg-card: #ffffff; --text-main: #2c3e33; --text-muted: #61796b; --border-light: #d1dcd4;
-}
+body.light-mode { --bg-body: #f4f6f4; --bg-card: #ffffff; --text-main: #2c3e33; --text-muted: #61796b; --border-light: #d1dcd4; }
 * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
 body { font-family: var(--main-font); background-color: var(--bg-body); background: linear-gradient(135deg, #071710, #113220); background-attachment: fixed; color: var(--text-main); direction: rtl; font-size: 15px; line-height: 1.6; min-height: 100vh; margin: 0; transition: background 0.4s ease; }
 body.light-mode { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
 
-.lucide {
-    width: 18px;
-    height: 18px;
-    stroke-width: 2.2px;
-    vertical-align: middle;
-    flex-shrink: 0;
-}
-.header-action-btn .lucide {
-    width: 17px;
-    height: 17px;
-}
+.lucide { width: 18px; height: 18px; stroke-width: 2.2px; vertical-align: middle; flex-shrink: 0; }
+.header-action-btn .lucide { width: 17px; height: 17px; }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes scanLaser {
-    0% { top: 10%; opacity: 0.4; }
-    50% { top: 88%; opacity: 1; }
-    100% { top: 10%; opacity: 0.4; }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scanLaser { 0% { top: 10%; opacity: 0.4; } 50% { top: 88%; opacity: 1; } 100% { top: 10%; opacity: 0.4; } }
 
 .login-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(7, 23, 16, 0.94); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; padding: 15px; animation: fadeIn 0.4s ease; }
 .login-box { background: rgba(255, 255, 255, 0.98); padding: 30px 20px; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); width: 100%; max-width: 380px; text-align: center; border: 2px solid var(--accent-gold); }
-.login-box img { width: 75px; margin-bottom: 10px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
+.login-box img { width: 85px; margin-bottom: 10px; border-radius: 10px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); }
 .input-control { width: 100%; padding: 12px 14px; border: 1px solid var(--border-light); border-radius: 8px; background: #f8fafc; color: var(--primary-main); font-family: var(--main-font); font-size: 1rem; margin-top: 5px; transition: var(--transition); }
 .input-control:focus { background: #fff; border-color: var(--accent-gold); box-shadow: 0 0 0 3px rgba(197, 168, 89, 0.2); }
 
@@ -60,35 +44,8 @@ body.light-mode { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
 .btn-gold { background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-hover)); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.1); padding: 14px; font-size: 1.05rem; margin-top: 15px; }
 .btn-secondary { background: #64748b; color: #fff; }
 
-.file-btn-wrapper {
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 13px 18px;
-    border-radius: 8px;
-    font-family: var(--main-font);
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #fff;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-}
-.file-btn-wrapper input[type="file"] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 10;
-}
+.file-btn-wrapper { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 18px; border-radius: 8px; font-family: var(--main-font); font-weight: 700; font-size: 0.95rem; color: #fff; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.12); }
+.file-btn-wrapper input[type="file"] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 10; }
 .bg-orange { background: #d97706; }
 .bg-blue { background: #2563eb; }
 .bg-green { background: #059669; margin-top: 10px; }
@@ -108,7 +65,6 @@ body.light-mode { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
 .section-title { margin-bottom: 14px; border-bottom: 1px solid var(--border-light); padding-bottom: 10px; color: var(--primary-main); font-size: 1.05rem; display: flex; align-items: center; gap: 8px; }
 .section-title .lucide { color: var(--accent-gold); width: 22px; height: 22px; }
 
-/* تصميم بطاقة السجل مع أزرار التعديل والحذف */
 .record-item { background: linear-gradient(135deg, #f8fafc, #edf2f7); border: 1.5px solid var(--border-light); border-right: 5px solid var(--accent-gold); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; transition: var(--transition); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
 .record-item:hover { border-color: var(--accent-gold); background: #fff; }
 .record-info { flex: 1; cursor: pointer; }
@@ -125,115 +81,28 @@ body.light-mode { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
 .search-wrapper .input-control { padding-right: 40px; margin-top: 0; }
 .search-wrapper .search-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
 
-/* تصميم شاشة الكاميرا المباشرة */
-#cameraModal {
-    display: none;
-    position: relative;
-    width: 100%;
-    max-width: 340px;
-    margin: 0 auto 14px;
-    border-radius: 14px;
-    overflow: hidden;
-    background: #000;
-    border: 2px solid var(--accent-gold);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-}
-#qrVideo {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    display: block;
-}
-.scan-overlay {
-    position: absolute;
-    inset: 0;
-    border: 35px solid rgba(0,0,0,0.45);
-    pointer-events: none;
-}
-.scan-frame {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border: 2px solid var(--accent-gold);
-    border-radius: 8px;
-}
-.scan-laser {
-    position: absolute;
-    left: 5%;
-    right: 5%;
-    height: 2px;
-    background: #ef4444;
-    box-shadow: 0 0 8px 2px #ef4444;
-    animation: scanLaser 2s infinite ease-in-out;
-}
-.camera-controls-bar {
-    display: flex;
-    gap: 6px;
-    padding: 8px;
-    background: #0f261a;
-}
+#cameraModal { display: none; position: relative; width: 100%; max-width: 340px; margin: 0 auto 14px; border-radius: 14px; overflow: hidden; background: #000; border: 2px solid var(--accent-gold); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+#qrVideo { width: 100%; height: 300px; object-fit: cover; display: block; }
+.scan-overlay { position: absolute; inset: 0; border: 35px solid rgba(0,0,0,0.45); pointer-events: none; }
+.scan-frame { position: relative; width: 100%; height: 100%; border: 2px solid var(--accent-gold); border-radius: 8px; }
+.scan-laser { position: absolute; left: 5%; right: 5%; height: 2px; background: #ef4444; box-shadow: 0 0 8px 2px #ef4444; animation: scanLaser 2s infinite ease-in-out; }
+.camera-controls-bar { display: flex; gap: 6px; padding: 8px; background: #0f261a; }
 
-#webviewAlert {
-    display: none;
-    background: #fffbeb;
-    border: 1.5px solid #f59e0b;
-    color: #92400e;
-    padding: 12px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    font-size: 0.82rem;
-    text-align: right;
-}
+#webviewAlert { display: none; background: #fffbeb; border: 1.5px solid #f59e0b; color: #92400e; padding: 12px; border-radius: 12px; margin-bottom: 15px; font-size: 0.82rem; text-align: right; }
 
-/* تصميم الملصق بعد تصغيره 1 سم في الطول والعرض (200px للملصق و 150px للـ QR) */
-#stickerPrintArea {
-    background: #ffffff;
-    color: #000000;
-    padding: 10px;
-    border-radius: 8px;
-    width: 200px;
-    margin: 12px auto;
-    border: 2px solid #000000;
-    text-align: center;
-}
-#qrCanvasContainer {
-    background: #ffffff;
-    padding: 8px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2px 0;
-}
-#qrCanvasContainer img, #qrCanvasContainer canvas {
-    margin: 0 auto;
-    display: block;
-    width: 150px !important;
-    height: 150px !important;
-    image-rendering: pixelated;
-}
+#stickerPrintArea { background: #ffffff; color: #000000; padding: 10px; border-radius: 8px; width: 200px; margin: 12px auto; border: 2px solid #000000; text-align: center; }
+#qrCanvasContainer { background: #ffffff; padding: 8px; display: inline-flex; justify-content: center; align-items: center; margin: 2px 0; }
+#qrCanvasContainer img, #qrCanvasContainer canvas { margin: 0 auto; display: block; width: 150px !important; height: 150px !important; image-rendering: pixelated; }
 
 #toastContainer { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 100000; display: flex; flex-direction: column; gap: 10px; width: 90%; max-width: 350px; pointer-events: none; }
 .toast { background: rgba(16, 185, 129, 0.95); color: #fff; padding: 12px 20px; border-radius: 10px; font-weight: bold; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center; font-size: 0.92rem; animation: fadeIn 0.3s ease; }
 
-/* إعدادات الطباعة بعد تصغير 1 سم طول و 1 سم عرض (عرض الملصق 4.5 سم، والـ QR داخله 3 سم × 3 سم) */
 @media print {
     @page { margin: 0; size: auto; }
     body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
     body * { visibility: hidden !important; }
     #stickerPrintArea, #stickerPrintArea * { visibility: visible !important; }
-    #stickerPrintArea {
-        position: fixed !important;
-        right: 5mm !important;
-        top: 5mm !important;
-        width: 45mm !important;
-        max-width: 45mm !important;
-        padding: 2.5mm !important;
-        margin: 0 !important;
-        border: 1.5px solid #000 !important;
-        border-radius: 4px !important;
-        box-shadow: none !important;
-        page-break-inside: avoid;
-    }
+    #stickerPrintArea { position: fixed !important; right: 5mm !important; top: 5mm !important; width: 45mm !important; max-width: 45mm !important; padding: 2.5mm !important; margin: 0 !important; border: 1.5px solid #000 !important; border-radius: 4px !important; box-shadow: none !important; page-break-inside: avoid; }
     #stickerPrintArea .stk-header { font-size: 7.5pt !important; margin-bottom: 1mm !important; padding-bottom: 1mm !important; }
     #qrCanvasContainer { padding: 1.5mm !important; }
     #qrCanvasContainer img, #qrCanvasContainer canvas { width: 30mm !important; height: 30mm !important; }
@@ -247,7 +116,7 @@ body.light-mode { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
 
 <div id="loginOverlay" class="login-overlay">
     <div class="login-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Emblem_of_Syria_%282025%E2%80%93present%29.svg" alt="الشعار">
+        <img id="loginLogo" src="" alt="الشعار">
         <h2>فرع المهام الخاصة</h2>
         <p style="color:var(--text-muted); margin-bottom:15px; font-size:0.85rem;">المهام الخاصة - درعا</p>
         <form onsubmit="event.preventDefault(); handleLogin();">
@@ -260,7 +129,7 @@ body.light-mode { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
 
 <header class="top-header">
     <div class="header-right-side">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Emblem_of_Syria_%282025%E2%80%93present%29.svg" style="width:32px; filter:drop-shadow(0 2px 5px rgba(197,168,89,0.5));">
+        <img id="headerLogo" src="" alt="الشعار" style="width:36px; border-radius:6px; filter:drop-shadow(0 2px 5px rgba(197,168,89,0.5));">
         <div class="header-titles"><h1>قسم التسليح والمهمات</h1><h2>المهام الخاصة</h2></div>
     </div>
     <div class="header-actions">
@@ -289,7 +158,7 @@ body.light-mode { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
         <div class="form-group" style="text-align:right; margin-bottom:12px;"><label style="font-size:0.85rem;">الاسم الثلاثي *</label><input type="text" id="fName" class="input-control" placeholder="...."></div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
             <div style="text-align:right;"><label style="font-size:0.85rem;">نوع السلاح *</label><input type="text" id="fType" class="input-control" placeholder="...."></div>
-            <div style="text-align:right;"><label style="font-size:0.85rem;">عدد المخازن *</label><input type="number" id="fMags" class="input-control" value="...."></div>
+            <div style="text-align:right;"><label style="font-size:0.85rem;">عدد المخازن *</label><input type="number" id="fMags" class="input-control" value="4"></div>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
             <div style="text-align:right;"><label style="font-size:0.85rem;">رمز المجموعة *</label><input type="text" id="fWpnNum" class="input-control" placeholder="...."></div>
@@ -301,7 +170,6 @@ body.light-mode { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
         <button id="cancelEditBtn" class="btn btn-secondary" style="margin-top:8px; display:none;" onclick="cancelEditMode()"><i data-lucide="x"></i> إلغاء التعديل</button>
     </div>
 
-    <!-- قسم الملصق المضبوط بحجم 3 سم × 3 سم للـ QR -->
     <div id="stickerSection" class="card" style="display:none; text-align:center;">
         <h3 class="section-title" style="justify-content:center;"><i data-lucide="tag"></i> الملصق الجاهز للطباعة والمسح السريع</h3>
         <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">مضبوط بمقاس (3 سم × 3 سم للـ QR) مع تشفير مضغوط لسرعة القراءة</p>
@@ -322,45 +190,28 @@ body.light-mode { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
         </div>
     </div>
 
-    <!-- قسم فحص ومطابقة الأسلحة -->
     <div class="card">
         <h3 class="section-title"><i data-lucide="scan-line"></i> فحص ومطابقة الأسلحة</h3>
         <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">وجه الكاميرا نحو الكود ليتم قراءته تلقائياً، أو التقط صورة، أو اختر من الاستوديو:</p>
         
         <div id="cameraModal">
             <video id="qrVideo" playsinline muted autoplay></video>
-            <div class="scan-overlay">
-                <div class="scan-frame">
-                    <div class="scan-laser"></div>
-                </div>
-            </div>
+            <div class="scan-overlay"><div class="scan-frame"><div class="scan-laser"></div></div></div>
             <div class="camera-controls-bar">
-                <button class="btn" style="background:var(--accent-gold); color:#000; padding:8px; font-size:0.82rem; flex:1;" onclick="captureStillFromVideo()">
-                    <i data-lucide="aperture"></i> لقطة فورية
-                </button>
-                <button class="btn" id="torchBtn" style="background:rgba(255,255,255,0.15); color:#fff; padding:8px; font-size:0.82rem; display:none; width:auto;" onclick="toggleTorch()">
-                    <i data-lucide="flashlight"></i> الفلاش
-                </button>
-                <button class="btn" style="background:#ef4444; color:#fff; padding:8px; font-size:0.82rem; width:auto;" onclick="stopNativeCamera()">
-                    <i data-lucide="x"></i> إغلاق
-                </button>
+                <button class="btn" style="background:var(--accent-gold); color:#000; padding:8px; font-size:0.82rem; flex:1;" onclick="captureStillFromVideo()"><i data-lucide="aperture"></i> لقطة فورية</button>
+                <button class="btn" id="torchBtn" style="background:rgba(255,255,255,0.15); color:#fff; padding:8px; font-size:0.82rem; display:none; width:auto;" onclick="toggleTorch()"><i data-lucide="flashlight"></i> الفلاش</button>
+                <button class="btn" style="background:#ef4444; color:#fff; padding:8px; font-size:0.82rem; width:auto;" onclick="stopNativeCamera()"><i data-lucide="x"></i> إغلاق</button>
             </div>
         </div>
 
         <div style="display:flex; flex-direction:column; gap:10px;">
-            <button class="btn btn-primary" onclick="startNativeCamera()">
-                <i data-lucide="video"></i> فتح الكاميرا المباشرة 
-            </button>
-            
+            <button class="btn btn-primary" onclick="startNativeCamera()"><i data-lucide="video"></i> فتح الكاميرا المباشرة</button>
             <div class="file-btn-wrapper bg-orange">
-                <i data-lucide="camera"></i>
-                <span>تصوير الكود بكاميرا الهاتف الأصلية</span>
+                <i data-lucide="camera"></i><span>تصوير الكود بكاميرا الهاتف الأصلية</span>
                 <input type="file" accept="image/*" capture="environment" onchange="handleImageFile(this)">
             </div>
-
             <div class="file-btn-wrapper bg-blue">
-                <i data-lucide="image"></i>
-                <span>اختيار صورة QR من المعرض </span>
+                <i data-lucide="image"></i><span>اختيار صورة QR من المعرض</span>
                 <input type="file" accept="image/*" onchange="handleImageFile(this)">
             </div>
         </div>
@@ -378,7 +229,7 @@ body.light-mode { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
     </div>
 
     <div class="card">
-        <h3 class="section-title"><i data-lucide="database"></i> سجل الأسلحة  (<span id="dbCount">0</span>)</h3>
+        <h3 class="section-title"><i data-lucide="database"></i> سجل الأسلحة (<span id="dbCount">0</span>)</h3>
         <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:10px; display:flex; align-items:center; gap:5px;"><i data-lucide="info" style="width:15px; height:15px; color:var(--accent-gold);"></i> يمكنك عرض الـ QR أو تعديل البيانات أو حذف أي سجل مباشرة:</p>
         
         <div class="search-wrapper">
@@ -391,18 +242,20 @@ body.light-mode { background: linear-gradient(135deg, #e2e8f0, #cbd5e1); }
         <button class="btn btn-gold" style="margin-top:15px;" onclick="exportToExcel()"><i data-lucide="file-down"></i> تصدير كامل السجل لملف Excel</button>
         
         <div class="file-btn-wrapper bg-green">
-            <i data-lucide="file-up"></i>
-            <span>استيراد سجل الأسلحة من ملف Excel</span>
+            <i data-lucide="file-up"></i><span>استيراد سجل الأسلحة من ملف Excel</span>
             <input type="file" accept=".xlsx, .xls" onchange="importFromExcel(this)">
         </div>
     </div>
 </div>
 
 <script>
+// الصورة المخصصة التي أرسلتها (مخزنة مرة واحدة وتوزع تلقائياً على كامل الموقع وأيقونة الهاتف)
+const CUSTOM_LOGO = "data:image/png;base64,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";
+
 const SECRET_KEY = "ARM_SEC_KEY_99";
 const STORAGE_KEY = "ARMORY_LOCAL_DB";
 
-let editingIndex = -1; // لتحديد السجل قيد التعديل
+let editingIndex = -1;
 let videoStream = null;
 let isScanningLive = false;
 let scanAnimationFrame = null;
@@ -411,6 +264,12 @@ const scanCanvas = document.createElement("canvas");
 const scanCtx = scanCanvas.getContext("2d", { willReadFrequently: true });
 
 window.onload = function() {
+    // تطبيق الشعار المخصص على أيقونة الهاتف، تسجيل الدخول، والهيدر
+    document.getElementById('favIcon').href = CUSTOM_LOGO;
+    document.getElementById('touchIcon').href = CUSTOM_LOGO;
+    document.getElementById('loginLogo').src = CUSTOM_LOGO;
+    document.getElementById('headerLogo').src = CUSTOM_LOGO;
+
     document.getElementById('fDate').valueAsDate = new Date();
     if(localStorage.getItem('active_system_user_siiss_v14')) {
         document.getElementById('loginOverlay').style.display = 'none';
@@ -422,8 +281,7 @@ window.onload = function() {
 
 function checkIfInAppWebView() {
     const ua = navigator.userAgent || navigator.vendor || window.opera;
-    const isWebView = /FBAN|FBAV|Instagram|Telegram|WhatsApp|Line|wv/i.test(ua);
-    if (isWebView) {
+    if (/FBAN|FBAV|Instagram|Telegram|WhatsApp|Line|wv/i.test(ua)) {
         document.getElementById('webviewAlert').style.display = 'block';
     }
 }
@@ -463,7 +321,6 @@ function showToast(msg, isError = false) {
     setTimeout(()=>toast.remove(), 3500);
 }
 
-// تشفير مضغوط فائق الكفاءة
 function encryptPayload(dataObj) {
     const compactStr = [dataObj.n, dataObj.t, dataObj.m, dataObj.w, dataObj.c, dataObj.d].join("|");
     const utf8Bytes = new TextEncoder().encode(compactStr);
@@ -475,7 +332,6 @@ function encryptPayload(dataObj) {
     return "S2#" + btoa(xored);
 }
 
-// فك التشفير (يدعم الأكواد الجديدة S2# والقديمة SEC#)
 function decryptPayload(cipherText) {
     try {
         if (!cipherText) return null;
@@ -509,7 +365,6 @@ function decryptPayload(cipherText) {
     } catch (e) { return null; }
 }
 
-// حفظ سلاح جديد أو حفظ التعديلات على سلاح موجود
 function createWeaponQR() {
     const name = document.getElementById('fName').value.trim();
     const type = document.getElementById('fType').value.trim();
@@ -524,7 +379,6 @@ function createWeaponQR() {
     let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
     if (editingIndex > -1 && editingIndex < db.length) {
-        // تحديث السجل الحالي
         db[editingIndex] = weaponObj;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
         cancelEditMode();
@@ -532,7 +386,6 @@ function createWeaponQR() {
         generateSticker(weaponObj);
         showToast("✔ تم حفظ التعديلات وتحديث الـ QR بنجاح");
     } else {
-        // إضافة سجل جديد
         db.unshift(weaponObj);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
         clearFormInputs();
@@ -551,7 +404,6 @@ function clearFormInputs() {
     document.getElementById('fDate').valueAsDate = new Date();
 }
 
-// تفعيل وضع تعديل بيانات سجل معين
 function startEditRecord(index) {
     const db = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     const item = db[index];
@@ -577,13 +429,12 @@ function startEditRecord(index) {
 function cancelEditMode() {
     editingIndex = -1;
     clearFormInputs();
-    document.getElementById('formTitle').innerHTML = `<i data-lucide="shield-plus"></i> إصدار QR للسلاح `;
+    document.getElementById('formTitle').innerHTML = `<i data-lucide="shield-plus"></i> إصدار لصقة سلاح جديدة مشفرة`;
     document.getElementById('saveBtn').innerHTML = `<i data-lucide="qr-code"></i> توليد وحفظ الـ QR المشفر`;
     document.getElementById('cancelEditBtn').style.display = 'none';
     lucide.createIcons();
 }
 
-// حذف سجل من القائمة
 function deleteRecord(index) {
     const db = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     const item = db[index];
@@ -607,7 +458,6 @@ function generateSticker(item) {
 
     const qrBox = document.getElementById('qrCanvasContainer');
     qrBox.innerHTML = '';
-    // حجم 150x150 (أصغر بـ 1 سم عن النسخة السابقة مع الحفاظ على دقة المربعات)
     new QRCode(qrBox, { 
         text: encryptedText, 
         width: 150, 
@@ -684,11 +534,7 @@ async function startNativeCamera() {
 
     try {
         videoStream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: { ideal: "environment" },
-                width: { ideal: 1280 },
-                height: { ideal: 720 }
-            },
+            video: { facingMode: { ideal: "environment" }, width: { ideal: 1280 }, height: { ideal: 720 } },
             audio: false
         });
 
@@ -900,7 +746,7 @@ function importFromExcel(input) {
                 const name = row["الاسم الثلاثي"] || row["n"];
                 const type = row["نوع السلاح"] || row["t"];
                 const mags = row["عدد المخازن"] || row["m"] || "4";
-                const wpnNum = row["رمز المجموعة"] || row["w"];
+                const wpnNum = row["رمز المجموعة"] || row["رقم السلاح"] || row["w"];
                 const chassis = row["رقم الهيكل"] || row["c"];
                 const date = row["تاريخ الاستلام"] || row["d"] || new Date().toISOString().slice(0,10);
 
@@ -921,7 +767,6 @@ function importFromExcel(input) {
     reader.readAsArrayBuffer(file);
 }
 
-// عرض السجلات مع الاحتفاظ بالرقم الفعلي لكل سجل (originalIndex) ليعمل التعديل والحذف بدقة حتى أثناء البحث
 function renderDatabaseRecords() {
     const db = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     document.getElementById('dbCount').textContent = db.length;
